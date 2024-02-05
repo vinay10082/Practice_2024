@@ -35,11 +35,25 @@ printNto1(s+1,N);
 cout<<s<<endl;
 }
 
+void reverseTheArray(vector<int> &array, int l, int r){
+
+if(l>=r) return;
+
+swap(array[l],array[r]);
+reverseTheArray(array, l+1, r-1);
+}
+
 int main(){
 
     // printName5times("vinay", 5);
+
     // print1toN(3);
-    printNto1(1,3);
+
+    // printNto1(1,3);
+
+    // vector<int> array= {1,2,3,4,5};
+    // reverseTheArray(array,0,4);
+    // for(auto i: array) cout<<i<<endl;
 
     return 0;
 }
