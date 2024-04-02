@@ -4,33 +4,32 @@ using namespace std;
 class Solution
 {
 public:
-    void printArraywithSumK(vector<int> ans, int k)
+    void printArray(vector<int> ans)
     {
-        int sum = accumulate(ans.begin(), ans.end(), sum);
-        if (sum == k)
-        {
             for (int i = 0; i < ans.size(); i++)
             {
                 cout << ans[i] << " ";
             }
             cout << endl;
-        }
         return;
     }
 
-    void printAllSubsequences(int element, vector<int> &ans, vector<int> nums, int n)
+    void printAllSubsequences(int element, vector<int> &ans, int sum, vector<int> nums, int k)
     {
-        if (element == n)
+        if (element == nums.size())
         {
-            printArraywithSumK(ans, 3);
+            if(sum == k) printArray(ans);
             return;
         }
         ans.push_back(nums[element]);
-        printAllSubsequences(element + 1, ans, nums, n);
+        sum += nums[element];
+        printAllSubsequences(element + 1, ans, sum, nums, k);
         ans.pop_back();
-        printAllSubsequences(element + 1, ans, nums, n);
+        sum -= nums[element];
+        printAllSubsequences(element + 1, ans, sum, nums, k);
         return;
     }
+
 };
 
 int main()
@@ -38,6 +37,6 @@ int main()
     vector<int> nums = {3, 1, 2};
     vector<int> ans;
     Solution solve;
-    solve.printAllSubsequences(0, ans, nums, nums.size());
+    solve.printAllSubsequences(0, ans, 0, nums, 4);
     return 0;
 }
